@@ -12,7 +12,7 @@ app.use((err, req, res, _next) => {
 // const client = new SteamUser()
 
 const startServer = () => {
-  const server = app.listen(4000, () => {
+  const server = app.listen(8080, () => {
     console.log('Server started on PORT:', server.address().port)
   })
   return server
