@@ -5,7 +5,7 @@ require('dotenv').config()
 
 const app = express()
 app.use(express.json())
-app.use((err, req, res) => {
+app.use((err, req, res, _next) => {
   console.error('Error occurs:', err.stack)
   res.status(500).send('Something went wrong')
 })
@@ -19,7 +19,7 @@ const startServer = () => {
 }
 
 app.get('/api/entry', (req, res) => {
-  res.json({ message: 'hello!' })
+  res.status(200).json({ message: 'hello!' })
 })
 
 startServer()
