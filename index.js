@@ -1,6 +1,6 @@
 const express = require('express')
-const SteamUser = require('steam-user')
-const csgoCDN = require('csgo-cdn')
+// const SteamUser = require('steam-user')
+// const csgoCDN = require('csgo-cdn')
 require('dotenv').config()
 
 const app = express()
@@ -9,7 +9,7 @@ app.use((err, req, res) => {
   console.error('Error occurs:', err.stack)
   res.status(500).send('Something went wrong')
 })
-const client = new SteamUser()
+// const client = new SteamUser()
 
 const startServer = () => {
   const server = app.listen(4000, () => {
@@ -18,27 +18,33 @@ const startServer = () => {
   return server
 }
 
-client.logOn({
-  login: process.env.STEAM_LOGIN,
-  password: process.env.STEAM_PASSWORD
+app.get('/api/entry', (req, res) => {
+  res.json({ message: 'hello!' })
 })
 
-client.on('loggedOn', () => {
-  // client.setPersona(SteamUser.EPersonaState.Online);
-  // client.gamesPlayed(440);
-  const cdn = new csgoCDN(client, { logLevel: 'debug' })
+startServer()
 
-  cdn.on('ready', () => {
-    startServer()
-
-    app.post('/get/icon', (req, res) => {
-      // console.log(cdn.getItemNameURL('StatTrak™ M4A4 | Desert-Strike (Well-Worn)'))
-      // console.log(cdn.getItemNameURL('★ Karambit | Gamma Doppler (Factory New)', cdn.phase.emerald))
-
-      res.json(req.body.map(item => {
-        return cdn.getItemNameURL(item)
-      }))
-    })
-  })
-})
+// client.logOn({
+//   login: process.env.STEAM_LOGIN,
+//   password: process.env.STEAM_PASSWORD
+// })
+//
+// client.on('loggedOn', () => {
+//   // client.setPersona(SteamUser.EPersonaState.Online);
+//   // client.gamesPlayed(440);
+//   const cdn = new csgoCDN(client, { logLevel: 'debug' })
+//
+//   cdn.on('ready', () => {
+//     startServer()
+//
+//     app.post('/get/icon', (req, res) => {
+//       // console.log(cdn.getItemNameURL('StatTrak™ M4A4 | Desert-Strike (Well-Worn)'))
+//       // console.log(cdn.getItemNameURL('★ Karambit | Gamma Doppler (Factory New)', cdn.phase.emerald))
+//
+//       res.json(req.body.map(item => {
+//         return cdn.getItemNameURL(item)
+//       }))
+//     })
+//   })
+// })
 
