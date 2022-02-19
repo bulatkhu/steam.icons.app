@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "csgo-cdn": "^1.2.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "steam-user": "^4.20.2"
   },

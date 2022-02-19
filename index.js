@@ -1,11 +1,12 @@
 const express = require('express')
 const SteamUser = require('steam-user')
 const csgoCDN = require('csgo-cdn')
+require('dotenv').config()
 
 const app = express()
 app.use(express.json())
-app.use((err, req, res, next) => {
-  console.error("Error occurs:", err.stack)
+app.use((err, req, res) => {
+  console.error('Error occurs:', err.stack)
   res.status(500).send('Something went wrong')
 })
 const client = new SteamUser()
@@ -18,8 +19,8 @@ const startServer = () => {
 }
 
 client.logOn({
-  login: 'login',
-  password: 'password'
+  login: process.env.STEAM_LOGIN,
+  password: process.env.STEAM_PASSWORD
 })
 
 client.on('loggedOn', () => {
