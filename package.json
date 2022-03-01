@@ -2,11 +2,11 @@
   "name": "nodejs-retrieving-items-images",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "nodemon index.js",
-    "start": "node index.js"
+    "start-dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "author": "bulatkhu",
   "license": "ISC",
@@ -14,7 +14,8 @@
     "csgo-cdn": "^1.2.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "steam-user": "^4.20.2"
+    "steam-user": "^4.20.2",
+    "url-metadata": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
