@@ -14,13 +14,20 @@ app.use((err, req, res, _next) => {
 
 app.get('/api/item/img/:hashName', checkApiKey, async (req, res) => {
   try {
-    const { image } = await urlMetadata(`https://steamcommunity.com/market/listings/730/${encodeURI(req.params.hashName)}`)
+    const { image: url } = await urlMetadata(`https://steamcommunity.com/market/listings/730/${encodeURI(req.params.hashName)}`)
+
+    const iconHash = url.replace('https://community.cloudflare.steamstatic.com/economy/image/', '').replace('/360fx360f', '')
+
+    if (iconHash.length < 10) {
+      throw 'Invalid item\'s hash'
+    }
+
     res.status(200).json({
-      url: image,
-      iconHash: image.replace('https://community.cloudflare.steamstatic.com/economy/image/', '').replace('/360fx360', '')
+      url,
+      iconHash
     })
   } catch (e) {
-    res.status(500).json(error)
+    res.status(500).json({ error: e })
   }
 })
 
