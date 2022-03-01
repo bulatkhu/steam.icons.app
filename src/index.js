@@ -24,6 +24,6 @@ app.get('/api/item/img/:hashName', checkApiKey, async (req, res) => {
   }
 })
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log('Server started on PORT:', server.address().port)
 })
