@@ -3,7 +3,10 @@ const cheerio = require("cheerio");
 
 const handleImage = async (req, res) => {
     try {
-        const browser = await puppeteer.launch({ devtools: true });
+        const browser = await puppeteer.launch({
+            devtools: true, headless: false,
+            args: ["--no-sandbox", "--disabled-setupid-sandbox"]
+        });
         const page = await browser.newPage();
         await page.goto(`https://steamcommunity.com/market/listings/730/${encodeURI(req.params.hashName)}`);
         const content = await page.content();
